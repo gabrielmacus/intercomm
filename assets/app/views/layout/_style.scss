@@ -1,0 +1,15 @@
+.layout-view-container
+{
+  height: 100%;
+  display: flex;
+  align-items: center;
+
+  & > main
+  {
+
+    margin: auto;
+    width: 90%;
+    max-width: 400px;
+
+  }
+}

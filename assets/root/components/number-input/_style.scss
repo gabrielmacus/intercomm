@@ -1,0 +1,35 @@
+.number-input-container
+{
+
+  & > .content
+  {
+    display: flex;
+    width: 100%;
+  }
+  & > .content > input
+  {
+    margin-right: 0.5rem;
+    width: 100%;
+  }
+  & > .content > .step-buttons
+  {
+    justify-content: space-between;
+    width: 10%;
+    display: flex;
+
+    & > .button-container
+    {
+      width: 45%;
+
+    }
+
+    @media all and (max-width: 1024px) {
+      width: 20%;
+    }
+
+    @media all and (max-width: 768px) {
+      width: 30%;
+    }
+  }
+
+}

@@ -1,0 +1,25 @@
+.input-container
+{
+  margin-bottom: 1rem;
+  float: left;
+  width: 100%;
+  
+  & > label
+  {
+    margin-bottom: 0.3rem;
+    color: $color-dark-1;
+    width: 100%;
+    float: left;
+    font-weight: 600;
+  }
+
+  & > .content > input{
+    border: 0;
+    border-bottom: 0.15rem solid $color-dark-1;
+    color:$main-foreground;
+    background: $main-background;
+    width: 100%;
+    float: left;
+  }
+
+}

@@ -1,0 +1,32 @@
+.select-input-container
+{
+  & > .content > .arrow
+  {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    display: flex;
+    align-content: center;
+  }
+  & > .content
+  {
+    position: relative;
+    float: left;
+    width: 100%;
+  }
+  & > .content > select
+  {
+    border: 0;
+    border-bottom: 0.15rem solid $color-dark-1;
+    color:$main-foreground;
+    background: $main-background;
+    width: 100%;
+    float: left;
+
+    -moz-appearance: none;
+    -webkit-appearance: none;
+
+
+  }
+}

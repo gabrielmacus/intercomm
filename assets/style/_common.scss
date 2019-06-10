@@ -1,0 +1,29 @@
+body{
+  font-family: $font-family;
+  color:$main-foreground;
+  background: $main-background;
+}
+html,body{
+  width: 100%;
+  height: 100%;
+}
+
+
+/* Root components */
+@import "../root/components/base-button/style";
+@import "../root/components/base-input/style";
+@import "../root/components/char-input/style";
+@import "../root/components/number-input/style";
+@import "../root/components/select-input/style";
+
+/* App components */
+@import "../app/components/user-list/style";
+
+/* Root Views */
+@import "../root/views/base/style";
+@import "../root/views/components-demo/style";
+
+/* App Views */
+@import "../app/views/login/style";
+@import "../app/views/layout/style";
+@import "../app/views/room/style";

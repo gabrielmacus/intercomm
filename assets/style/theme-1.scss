@@ -1,0 +1,30 @@
+@import "normalize.css";
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap');
+
+$font-family:'Roboto', sans-serif;
+
+$main-background:#212121;
+$main-foreground:white;
+
+$color-primary-1:#009688 ;
+$color-dark-1:#00897b  ;
+$color-light-1:#26a69a;
+
+$foreground-1:white;
+
+@mixin box-shadow-1()
+{
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+@mixin box-shadow-2()
+{
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+@mixin transition-1()
+{
+  transition:all 0.2s;
+}
+html{font-size: 18px;}
+@import "common";
+

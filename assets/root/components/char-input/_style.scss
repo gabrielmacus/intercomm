@@ -1,0 +1,9 @@
+.char-input-container
+{
+
+  & > input.placeholder
+  {
+    visibility: hidden;
+
+  }
+}
