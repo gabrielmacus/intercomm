@@ -21,6 +21,16 @@
       margin-bottom: 0.1rem;
       color: black;
       list-style: none;
+
+      & > .actions
+      { float: right;
+        .call
+        {
+
+          color: #2e7d32;
+          font-weight: 600;
+        }
+      }
     }
   }
 }

@@ -6,6 +6,7 @@ class LoginView  extends LayoutView{
 
     }
 
+
     submit(e){
 
         STORE.ws_connection = new WebSocket(ENV.ws_url);
@@ -27,7 +28,7 @@ class LoginView  extends LayoutView{
         };
 
         STORE.ws_connection.onerror = (e)=>{
-
+            alert('Error al conectarse al servidor');
         };
 
         e.preventDefault();

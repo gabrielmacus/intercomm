@@ -109,6 +109,11 @@ html, body {
     margin-bottom: 0.1rem;
     color: black;
     list-style: none; }
+    .user-list-container > .list > .user > .actions {
+      float: right; }
+      .user-list-container > .list > .user > .actions .call {
+        color: #2e7d32;
+        font-weight: 600; }
 
 /* Root Views */
 .base-view-container {
