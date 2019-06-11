@@ -4,14 +4,11 @@ class UserList  {
     constructor(vnode) {
         this.user_list = []
         this.connected_peer = null;
-        this.data_channel = null;
     }
 
     callUser(user,event)
     {
         console.log("Calling user...");
-
-
 
 
             this.connected_peer = user.connection_id;
@@ -26,43 +23,13 @@ class UserList  {
     }
 
 
-    sendMsg(event)
-    {
-       this.data_channel.send( event.target.value);
-    }
 
     oncreate(vnode) {
-        navigator.getUserMedia({ video: false, audio: true },
-            (stream)=>{
-            console.log(stream)
-            },
-            (error)=>{console.log(error)})
 
         if(STORE.ws_connection)
         {
             let self = this;
-            STORE.rtc_connection = new RTCPeerConnection(ENV.rtc_config);
 
-            STORE.rtc_connection.ondatachannel = (event) =>{
-                this.data_channel = event.channel;
-                this.data_channel.onerror = function (error) {
-                    console.log("Error:", error);
-                };
-
-                this.data_channel.onopen = (e)=>{
-                    console.log("data channel opennecd")
-                }
-                this.data_channel.onmessage = function (event) {
-                    console.log("Got message:", event.data);
-                };
-            }
-            STORE.rtc_connection.onicecandidate = (event)=>{
-
-                if(event.candidate)
-                {
-                    STORE.ws_connection.send(JSON.stringify({"to":self.connected_peer,"type":"msg","subtype":"icecandidate","candidate":event.candidate}));
-                }
-            };
             STORE.ws_connection.onmessage = (e)=>{
 
 
@@ -97,13 +64,20 @@ class UserList  {
                         break;
                     case 'offer':
                         this.connected_peer = data.from;
-                        STORE.rtc_connection.setRemoteDescription(new RTCSessionDescription(data.offer));
-                        STORE.rtc_connection.createAnswer((answer)=>{
-                            STORE.rtc_connection.setLocalDescription(answer);
-                            STORE.ws_connection.send(JSON.stringify({type:'msg',to:data.from,subtype:'answer',answer:answer}));
-                        },(error)=>{
-                            console.log(error);
+                        STORE.rtc_connection.setRemoteDescription(new RTCSessionDescription(data.offer),function () {
+
+                            STORE.rtc_connection.createAnswer((answer)=>{
+                                STORE.rtc_connection.setLocalDescription(answer);
+                                STORE.ws_connection.send(JSON.stringify({type:'msg',to:data.from,subtype:'answer',answer:answer}));
+                            },(error)=>{
+                                console.log(error);
+                            });
+
+
+                        },function () {
+                            alert('Error al responder')
                         });
+
                         break;
                     case 'answer':
                         STORE.rtc_connection.setRemoteDescription(new RTCSessionDescription(data.answer));
@@ -118,7 +92,37 @@ class UserList  {
 
             }
             STORE.ws_connection.send(JSON.stringify({type:"sync-request",subtype:'connected-users'}));
+
+
+
+            STORE.rtc_connection = new RTCPeerConnection(ENV.rtc_config);
+            let audio = document.querySelector("#voice");
+            STORE.rtc_connection.onaddstream = function (e) {
+
+                audio.src = window.URL.createObjectURL(e.stream);
+            };
+            STORE.rtc_connection.onicecandidate = (event)=>{
+
+                if(event.candidate)
+                {
+                    STORE.ws_connection.send(JSON.stringify({"to":self.connected_peer,"type":"msg","subtype":"icecandidate","candidate":event.candidate}));
+                }
+            };
+
+            navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+
+            navigator.getUserMedia({ video: false, audio: true },
+                (stream)=>{
+
+                    STORE.rtc_connection.addStream(stream);
+                },
+                (error)=>{console.log(error)})
+
+
+
         }
+
+
 
     }
 
@@ -128,18 +132,15 @@ class UserList  {
             m("h3.title",`Usuarios en línea (${this.user_list.length})`),
             m("ul.list",[
                 this.user_list.map((user)=>{
-                    return [
-                        m("li.user",{key:user.connection_id},[
+                    return m("li.user",{key:user.connection_id},[
                             m("span.username",user.username),
                             m(".actions",[
                                 m("span.call",{onclick:self.callUser.bind(self,user)},"Llamar")
                             ])
 
-                        ]),
-                        m("input",{oninput: self.sendMsg.bind(self) })
-
-                    ];
-                })
+                        ]);
+                }),
+                m("audio#voice",{autoplay:true})
             ])
 
         ]);
