@@ -1,6 +1,6 @@
 window.ENV = {
 
-    'ws_url':'wss://a716f75b.ngrok.io',
+    'ws_url':'ws://192.168.0.6:8080',
     'rtc_config':{
         "iceServers": [
 

@@ -98,22 +98,38 @@ html, body {
   margin: 0;
   display: block;
   margin-bottom: 0.5rem; }
+.user-list-container > .footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  padding: 0.5rem;
+  background: #e0e0e0;
+  color: #0277bd;
+  text-align: center; }
+  .user-list-container > .footer > p {
+    margin: 0; }
 .user-list-container > .list {
   float: left;
   width: 100%;
   margin: 0;
   padding: 0; }
+  .user-list-container > .list > .empty > p {
+    padding: 0;
+    margin: 0; }
   .user-list-container > .list > .user {
     background: #eeeeee;
     padding: 0.5rem;
     margin-bottom: 0.1rem;
     color: black;
-    list-style: none; }
-    .user-list-container > .list > .user > .actions {
-      float: right; }
-      .user-list-container > .list > .user > .actions .call {
-        color: #2e7d32;
-        font-weight: 600; }
+    list-style: none;
+    display: flex;
+    justify-content: space-between; }
+    .user-list-container > .list > .user > .username {
+      font-weight: 600; }
+    .user-list-container > .list > .user > .actions.disabled {
+      opacity: 0.4;
+      pointer-events: none; }
 
 /* Root Views */
 .base-view-container {

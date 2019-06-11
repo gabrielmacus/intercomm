@@ -8,8 +8,35 @@
     display: block;
     margin-bottom: 0.5rem;
   }
+  & > .footer
+  {
+    & > p
+    {
+      margin: 0;
+    }
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    padding: 0.5rem;
+    background: #e0e0e0;
+    color: #0277bd;
+    text-align: center
+  }
+
+
+
   & > .list
   {
+    & > .empty
+    {
+      & > p
+      {
+        padding: 0;
+        margin: 0;
+      }
+    }
+
     float: left;
     width: 100%;
     margin: 0;
@@ -21,16 +48,21 @@
       margin-bottom: 0.1rem;
       color: black;
       list-style: none;
-
-      & > .actions
-      { float: right;
-        .call
-        {
-
-          color: #2e7d32;
-          font-weight: 600;
-        }
+      display: flex;
+      justify-content: space-between;
+      & > .username{
+        font-weight: 600;
       }
+
+      & > .actions.disabled{
+        opacity: 0.4;
+        pointer-events: none;
+      }
+      & > .actions
+      {
+
+      }
+
     }
   }
 }
